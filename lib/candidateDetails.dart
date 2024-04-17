@@ -128,81 +128,83 @@ class _CandidateDetailState extends State<CandidateDetail> {
         ),
       ),
       backgroundColor: Color(0xFFF7D9C9),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    _showFullPhoto(context, widget.candidate.Photo);
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      _showFullPhoto(context, widget.candidate.Photo);
+                    },
+                    child: CircleAvatar(
+                      radius: 60,
+                      backgroundImage: NetworkImage(widget.candidate.Photo),
+                    ),
+                  ),
+                  SizedBox(width: 20.0),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          ' ${widget.candidate.Name}',
+                          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10.0),
+                        Text(
+                          ' ${widget.candidate.Email}',
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                        SizedBox(height: 10.0),
+                        Text(
+                          'Job Role: ${widget.candidate.skills}',
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                        SizedBox(height: 10.0),
+                        Text(
+                          'Experience: ${widget.candidate.Work_experience} years',
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                        SizedBox(height: 20.0),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    _updateConnectionStatus(!isConnected);
                   },
-                  child: CircleAvatar(
-                    radius: 60,
-                    backgroundImage: NetworkImage(widget.candidate.Photo),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      isConnected ? Colors.red : Color(0xFF781421),
+                    ),
                   ),
-                ),
-                SizedBox(width: 20.0),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        ' ${widget.candidate.Name}',
-                        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 10.0),
-                      Text(
-                        ' ${widget.candidate.Email}',
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      SizedBox(height: 10.0),
-                      Text(
-                        'Job Role: ${widget.candidate.skills}',
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      SizedBox(height: 10.0),
-                      Text(
-                        'Experience: ${widget.candidate.Work_experience} years',
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      SizedBox(height: 20.0),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  _updateConnectionStatus(!isConnected);
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    isConnected ? Colors.red : Color(0xFF781421),
-                  ),
-                ),
-                child: Text(
-                  isConnected ? 'Remove Connection' : 'Connect',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                  child: Text(
+                    isConnected ? 'Remove Connection' : 'Connect',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 20.0),
-            Text(
-              'Posts:',
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10.0),
-            Expanded(
-              child: ListView.builder(
+              SizedBox(height: 20.0),
+              Text(
+                'Posts:',
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10.0),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: candidatePosts.length,
                 itemBuilder: (context, index) {
                   final post = candidatePosts[index];
@@ -236,8 +238,8 @@ class _CandidateDetailState extends State<CandidateDetail> {
                   );
                 },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

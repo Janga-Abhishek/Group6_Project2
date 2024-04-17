@@ -14,6 +14,7 @@ void main() async{
       appId:"1:962439236287:android:a5fb761d3236e57774d40a",
       messagingSenderId:"962439236287",
       projectId: "group6-project2-68a2a",
+      storageBucket: "gs://group6-project2-68a2a.appspot.com",
     ),
   )
       :await Firebase.initializeApp();

@@ -13,7 +13,7 @@ class JobDetails extends StatefulWidget {
 
 class _JobDetailsState extends State<JobDetails> {
   bool applied = false;
-  DatabaseReference _jobRef = FirebaseDatabase.instance.reference().child('AppliedJobs');
+  DatabaseReference _jobRef = FirebaseDatabase.instance.ref().child('AppliedJobs');
 
   @override
   void initState() {

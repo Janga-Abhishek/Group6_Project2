@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:group6_project2/candidate.dart';
 import 'package:group6_project2/candidateDetails.dart';
 import 'package:group6_project2/animations/candidateList.dart';
+import 'package:group6_project2/myConnections.dart';
 
 class Candidates extends StatefulWidget {
   @override
@@ -54,7 +55,28 @@ class _CandidatesState extends State<Candidates> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Candidates List', style: TextStyle(fontSize: 16),),
+        title: Text(
+          'Candidates List',
+          style: TextStyle(fontSize: 16),
+        ),
+        actions: [
+          PopupMenuButton(
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                child: ListTile(
+                  leading: Icon(Icons.people),
+                  title: Text('My Connections'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyConnections()),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ],
         toolbarHeight: 40,
       ),
       backgroundColor: Color(0xFFF7D9C9),

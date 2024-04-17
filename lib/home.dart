@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:group6_project2/post.dart';
+import 'package:group6_project2/createPost.dart';
+import 'package:group6_project2/createJob.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -57,19 +59,68 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     });
   }
 
+  void handleMenuSelection(String value) {
+    if (value == 'writePost') {
+      // Navigate to the screen where users can write a post
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => CreatePost()),
+      );
+    } else if (value == 'createJob') {
+      // Navigate to the screen where users can create a job
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => CreateJob()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Posts', style: TextStyle(fontSize: 16)),
         toolbarHeight: 40,
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: handleMenuSelection,
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(
+                  value: 'writePost',
+                  child: Row(
+                    children: [
+                      Icon(Icons.edit),
+                      SizedBox(width: 10),
+                      Text('Write a Post'),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'createJob',
+                  child: Row(
+                    children: [
+                      Icon(Icons.work),
+                      SizedBox(width: 10),
+                      Text('Create a Job'),
+                    ],
+                  ),
+                ),
+              ];
+            },
+          ),
+        ],
       ),
       backgroundColor: Color(0xFFF7D9C9),
       body: posts.isEmpty
           ? Center(
-        child: Text(
-          'No Connections',
-          style: TextStyle(fontSize: 18),
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 20.0), // Adjust margin as needed
+          child: Text(
+            'No Connections. Connect to more people to see the posts.',
+            style: TextStyle(fontSize: 18),
+            textAlign: TextAlign.center, // Center-align the text
+          ),
         ),
       )
           : ListView.builder(
@@ -108,7 +159,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                         SizedBox(height: 8.0),
                         Text(
-                          post.showFullText ? post.postContent : '${post.postContent.substring(0, 100)}...',
+                          post.showFullText ? post.postContent : _getPostContentPreview(post.postContent),
                           style: TextStyle(fontSize: 16.0),
                         ),
                         if (post.postContent.length > 100) ...[
@@ -143,11 +194,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             IconButton(
                               icon: Icon(Icons.share),
                               onPressed: () {
+                                // Handle share button tap
                               },
                             ),
                             IconButton(
                               icon: Icon(Icons.comment),
                               onPressed: () {
+                                // Handle comment button tap
                               },
                             ),
                           ],
@@ -168,5 +221,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void dispose() {
     _animationController.dispose();
     super.dispose();
+  }
+
+  // Function to get the content preview or full content based on the showFullText flag
+  String _getPostContentPreview(String content) {
+    if (content.length <= 100) {
+      return content;
+    } else {
+      return '${content.substring(0, 100)}...';
+    }
   }
 }
