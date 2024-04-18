@@ -47,6 +47,7 @@ class _JobDetailsState extends State<JobDetails> {
       'company': widget.job.company,
       'location': widget.job.location,
       'description': widget.job.description,
+      'logo': widget.job.logo,
       'applied': true,
     });
   }

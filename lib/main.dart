@@ -73,7 +73,7 @@ class _MyAppHomeState extends State<MyAppHome> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.supervised_user_circle),
-            label: 'My Network',
+            label: 'Network',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.work),

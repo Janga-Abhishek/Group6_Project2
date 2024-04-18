@@ -64,7 +64,8 @@ class _CandidatesState extends State<Candidates> {
             itemBuilder: (context) => [
               PopupMenuItem(
                 child: ListTile(
-                  leading: Icon(Icons.people),
+                  leading: Icon(Icons.people,
+                      color:Color(0xFF781421)),
                   title: Text('My Connections'),
                   onTap: () {
                     Navigator.push(

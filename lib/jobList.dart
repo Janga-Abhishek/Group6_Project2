@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:group6_project2/job.dart';
 import 'package:group6_project2/jobDetails.dart';
+import 'package:group6_project2/appliedJobs.dart';
 
 class JobList extends StatefulWidget {
   @override
@@ -37,6 +38,7 @@ class _JobListState extends State<JobList> with SingleTickerProviderStateMixin {
     _controller.dispose();
     super.dispose();
   }
+
   void fetchJobs() {
     DatabaseReference jobsRef = FirebaseDatabase.instance.ref().child('jobs');
 
@@ -66,6 +68,14 @@ class _JobListState extends State<JobList> with SingleTickerProviderStateMixin {
     });
   }
 
+  void _handleMenuClick(String value) {
+    if (value == 'applied_jobs') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AppliedJobs()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +88,27 @@ class _JobListState extends State<JobList> with SingleTickerProviderStateMixin {
           style: TextStyle(fontSize: 16),
         ),
         toolbarHeight: 40,
+        actions: [
+          PopupMenuButton<String>(
+            icon: Icon(Icons.more_vert),
+            onSelected: _handleMenuClick,
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(
+                  value: 'applied_jobs',
+                  child: Row(
+                    children: [
+                      Icon(Icons.work,
+                          color:Color(0xFF781421)),
+                      SizedBox(width: 10),
+                      Text('Applied Jobs'),
+                    ],
+                  ),
+                ),
+              ];
+            },
+          ),
+        ],
       ),
       backgroundColor: Color(0xFFF7D9C9),
       body: GridView.builder(

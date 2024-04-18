@@ -90,7 +90,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   value: 'writePost',
                   child: Row(
                     children: [
-                      Icon(Icons.edit),
+                      Icon(Icons.edit,
+                          color:Color(0xFF781421)),
                       SizedBox(width: 10),
                       Text('Write a Post'),
                     ],
@@ -100,7 +101,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   value: 'createJob',
                   child: Row(
                     children: [
-                      Icon(Icons.work),
+                      Icon(Icons.work,
+                          color:Color(0xFF781421)),
                       SizedBox(width: 10),
                       Text('Create a Job'),
                     ],
@@ -171,7 +173,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             },
                             child: Text(
                               post.showFullText ? 'Read Less' : 'Read More',
-                              style: TextStyle(color: Colors.blue),
+                              style: TextStyle(color: Color(0xFF781421)),
                             ),
                           ),
                         ],
@@ -183,7 +185,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             IconButton(
                               icon: Icon(
                                 Icons.thumb_up,
-                                color: post.isLiked ? Colors.blue : null,
+                                color: post.isLiked ? Color(0xFF781421) : null,
                               ),
                               onPressed: () {
                                 setState(() {
