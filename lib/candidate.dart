@@ -7,13 +7,7 @@ class Candidate {
    String skills;
    int Work_experience;
 
-   Candidate(
-       this.Name,
-       this.Email,
-       this.Photo,
-       this.skills,
-       this.Work_experience,
-   );
+   Candidate(this.Name, this.Email, this.Photo, this.skills, this.Work_experience,);
 
    factory Candidate.fromSnapshot(DataSnapshot snapshot) {
       Map<dynamic, dynamic>? data = snapshot.value as Map<dynamic, dynamic>?;

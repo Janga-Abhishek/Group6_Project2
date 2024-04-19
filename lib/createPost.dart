@@ -134,14 +134,30 @@ class _CreatePostState extends State<CreatePost> {
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () => _pickImage(ImageSource.gallery),
-              child: Text('Pick Image'),
+              child: Text('Pick Image',style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),),
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                backgroundColor: Color(0xFF781421),
+                minimumSize: Size(120, 40),
+              ),
             ),
             SizedBox(height: 10.0),
             _imageFile != null ? Image.file(_imageFile!) : Container(),
             SizedBox(height: 10.0),
             ElevatedButton(
               onPressed: _isUploading ? null : _uploadPost,
-              child: _isUploading ? CircularProgressIndicator() : Text('Post'),
+              child: _isUploading ? CircularProgressIndicator() : Text('Post',style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),),
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                backgroundColor: Color(0xFF781421),
+                minimumSize: Size(120, 40),
+              ),
             ),
           ],
         ),
